@@ -17,10 +17,13 @@ function App() {
     sendToAI(transcript);
   };
 
-  const startListening = () => {
+  const [listening, setListening] = useState(false); // 新增這行
+
+const startListening = () => {
     setListening(true);
     recognition.start();
-  };
+};
+
 
   const sendToAI = async (query) => {
     try {
