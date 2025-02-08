@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { QRCodeCanvas } from "qrcode.react";
 
-
 function App() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  //const [listening, setListening] = useState(false);
+  const [listening, setListening] = useState(false);  // ✅ 這行很重要！
 
   const recognition = new window.webkitSpeechRecognition();
   recognition.lang = "zh-TW";
@@ -17,13 +16,10 @@ function App() {
     sendToAI(transcript);
   };
 
-  const [listening, setListening] = useState(false); // 新增這行
-
-const startListening = () => {
-    setListening(true);
+  const startListening = () => {
+    setListening(true); // ✅ 這裡會正確使用 `setListening`
     recognition.start();
-};
-
+  };
 
   const sendToAI = async (query) => {
     try {
@@ -39,7 +35,6 @@ const startListening = () => {
       <h1>博物館 AI 學習助理</h1>
       
       <QRCodeCanvas value="https://museum-ai.pages.dev" size={150} />
-
       <p>掃描 QR Code 進入 AI 助理</p>
       
       <button onClick={startListening} style={{ fontSize: "16px", padding: "10px", margin: "10px" }}>
