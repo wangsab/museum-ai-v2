@@ -15,3 +15,17 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+const recognition = new webkitSpeechRecognition();
+recognition.lang = "zh-TW";  // 設定中文識別
+
+recognition.onresult = (event) => {
+    let transcript = event.results[0][0].transcript;
+    sendToAI(transcript);  // 將語音文字傳送給 AI
+};
+
+function startListening() {
+    recognition.start();
+}
+
+<button onclick="startListening()">🎤 說話</button>
